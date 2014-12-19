@@ -28,10 +28,16 @@ public class ComplexJob extends GenericJob implements Job, Comparable<Job> {
     }
 
     /**
-     * Returns the total runtime of this Job.
-     * @return Runtime
+     * @inheritDoc
      */
     public int process() {
         return this.getComplexity() * this.getComplexity();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public ComplexJob copy() {
+        return new ComplexJob(this.getComplexity(), this.getArrivalTime(), this.getName());
     }
 }

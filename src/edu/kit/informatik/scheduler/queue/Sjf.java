@@ -3,6 +3,7 @@ package edu.kit.informatik.scheduler.queue;
 import edu.kit.informatik.scheduler.job.Job;
 
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.PriorityQueue;
 
 /**
@@ -11,18 +12,27 @@ import java.util.PriorityQueue;
  * @version 1.0
  */
 public class Sjf extends PriorityQueue<Job> implements edu.kit.informatik.scheduler.queue.Queue {
-    public String toString() {
-        Job current = this.peek();
-        String out = "";
-        if (current != null) {
-            out += current.getName() + "(" + current.process() + ")";
-            current = current.getNext();
-        }
-        while (current != null) {
-            out += "," + current.getName() + "(" + current.process() + ")";
 
-            current = current.getNext();
+    /**
+     * @inheritDoc
+     */
+    public String toString() {
+        Job current;
+        String out = "";
+
+        Iterator<Job> iter = this.iterator();
+
+        if (iter.hasNext()) {
+            current = iter.next();
+            out += current.getName() + "(" + current.process() + ")";
         }
+
+        while (iter.hasNext()) {
+            current = iter.next();
+            out += ",";
+            out += current.getName() + "(" + current.process() + ")";
+        }
+
         return out;
     }
 }

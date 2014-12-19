@@ -32,4 +32,6 @@ public interface Queue {
      * @return String with all elements
      */
     String toString();
+
+
 }

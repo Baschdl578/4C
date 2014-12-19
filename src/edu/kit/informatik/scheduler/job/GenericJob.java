@@ -7,7 +7,6 @@ package edu.kit.informatik.scheduler.job;
  * @version 1.0
  */
 public class GenericJob {
-    private Job next;
     private int complexity;
     private String name;
     private int arrivalTime;
@@ -24,43 +23,34 @@ public class GenericJob {
         this.arrivalTime = arrivalTime;
     }
 
-    /**
-     * Returns the next Job
-     * @return next Job
-     */
-    public Job getNext() {
-        return next;
-    }
 
     /**
-     * Sets the pointer to the next Job in the list
-     * @param next Next Job
-     */
-    public void setNext(Job next) {
-        this.next = next;
-    }
-
-    /**
-     * Return the Job's complexity
-     * @return {@code this.complexity}
+     * @inheritDoc
      */
     public int getComplexity() {
         return complexity;
     }
 
     /**
-     * Gets the name of the Job
-     * @return {@code this.name}
+     * @inheritDoc
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Gets the arrival time of the Job
-     * @return {@code this.arrivalTime}
+     * @inheritDoc
      */
     public int getArrivalTime() {
         return arrivalTime;
     }
+
+
+    /**
+     * @inheritDoc
+     */
+    public void setComplexity(int complexity) {
+        this.complexity = complexity;
+    }
+
 }

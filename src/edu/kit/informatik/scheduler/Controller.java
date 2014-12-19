@@ -44,10 +44,12 @@ public class Controller {
     /**
      * Puts the jobs from the file in the queue
      * @param jobs Array of job descriptions
+     * @return Array of Jobs
      */
-    public void parseJobs(String[] jobs) {
-        for(String i: jobs) {
-            String[] details = i.split(",");
+    public Job[] parseJobs(String[] jobs) {
+        Job[] out = new Job[jobs.length];
+        for (int i = 0; i < jobs.length; i++) {
+            String[] details = jobs[i].split(",");
             int complexity = new Integer(details[3]);
             int arrival = new Integer(details[2]);
 
@@ -58,62 +60,98 @@ public class Controller {
                 job = new ComplexJob(complexity, arrival, details[0]);
             }
 
-            queue.add(job);
+            out[i] = job;
         }
+        return out;
     }
 
+
     /**
-     * Simulates and prints the
+     * Simulates and prints the scheduler
+     * @param jobs Array of Jobs
      */
-    public void simulate() {
+    public void simulate(Job[] jobs) {
         boolean working = false;
         Job current = null;
-        int startTime = 0;
-        int times = 1;
-        while (times > 0) {
-            if (time == queue.peek().getArrivalTime()) {
-                if (!working) {
-                    working = true;
-                    current = queue.remove();
-                    startTime = time;
-                } else {
-                    if (current.process() + 1 + startTime == time) {
-                        current = queue.remove();
-                        startTime = time;
-                    } else working = false;
+        boolean cont = true;
+        int remaining = 0;
+
+
+        do {
+            for (Job i: jobs) {
+                if (time == i.getArrivalTime()) {
+                    queue.add(i.copy());
+                    i.setComplexity(0);
                 }
             }
-            int remaining = 0;
+
             String out = "";
             out += time + ":";
-            if (working) {
-                out += current.getName() + "(";
-                remaining = current.process() - (time - startTime);
-                out += remaining + ")";
-            } else out += "noneArrived";
-            out += ",Waiting:";
-            if (!queue.toString().equals("")) {
-                out += queue.toString();
-            } else out += "empty";
 
+            if (!working) {
+                if (time < queue.peek().getArrivalTime()) {
+                    out += "noneArrived";
+                } else {
+                    current = queue.remove();
+                    remaining = current.process();
+                    working = true;
+                    out += current.getName() + "(" + remaining + ")";
+                }
+            } else {
+                remaining--;
+                if (remaining == 0) {
+                    if (time < queue.peek().getArrivalTime()) {
+                        working = false;
+                        out += "noneArrived";
+                    } else {
+                        current = queue.remove();
+                        remaining = current.process();
+                        working = true;
+                        out += current.getName() + "(" + remaining + ")";
+                    }
+                } else {
+                    out += current.getName() + "(" + remaining + ")";
+                }
+            }
+
+
+            out += ",Waiting:";
+
+            if (queue.toString().equals("")) {
+                out += "empty";
+            } else {
+                out += queue.toString();
+            }
             Terminal.printLine(out);
+
             time++;
 
-            Job stopper = null;
-            try {
-                stopper = queue.peek();
-            } catch (EmptyStackException e) {
-                times = remaining;
+
+            //Requirements for quitting
+            if (remaining == 1) {
+                try {
+                    Job tmp = queue.peek();
+                    cont = (tmp != null);
+                    for (Job i: jobs) {
+                        if (i.getComplexity() != 0) {
+                            cont = true;
+                        }
+                    }
+                } catch (EmptyStackException e) {
+                    cont = false;
+                    for (Job i: jobs) {
+                        if (i.getComplexity() != 0) {
+                            cont = true;
+                        }
+                    }
+                }
             }
-            if (stopper == null) {
-                times = remaining;
-            }
-        }
+        } while (cont);
     }
 
     /**
      * Initializes a new controller and starts simulation
-     * @param args
+     * @param args Program arguments
      */
     public static void main(String args[]) {
         if (args.length != 2) {
@@ -121,9 +159,9 @@ public class Controller {
             System.exit(1);
         }
         Controller controller = new Controller(args[1]);
-        controller.parseJobs(Reader.read(args[0]));
+        Job[] jobs = controller.parseJobs(Reader.read(args[0]));
 
-        controller.simulate();
+        controller.simulate(jobs);
     }
 }
 

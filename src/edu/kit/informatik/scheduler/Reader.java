@@ -14,6 +14,12 @@ import java.io.BufferedReader;
  * @version 1.0
  */
 public class Reader {
+    /**
+     * Counts the lines in a File
+     * @param filename filename
+     * @return number of Lines
+     * @throws IOException on unexpected Error
+     */
     public static int countLines(String filename) throws IOException {
         int lines = 0;
         FileReader in = null;

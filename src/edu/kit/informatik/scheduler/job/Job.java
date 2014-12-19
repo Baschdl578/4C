@@ -6,7 +6,7 @@ package edu.kit.informatik.scheduler.job;
  */
 public interface Job {
     /**
-     * Reurns the total runtime
+     * Returns the total runtime
      * @return runtime
      */
     int process();
@@ -30,14 +30,15 @@ public interface Job {
     String getName();
 
     /**
-     * Returns the next Job
-     * @return next Job
+     * Sets the complexity
+     * @param complexity new complexity
      */
-    Job getNext();
+    void setComplexity(int complexity);
+
 
     /**
-     * Sets the pointer to the next Job in the list
-     * @param next Next Job
+     * copies a job
+     * @return similar job
      */
-    void setNext(Job next);
+    Job copy();
 }
