@@ -163,6 +163,7 @@ public class Controller {
             arguments[0] = args[0];
             arguments[1] = "waitingarea=fifo";
             Controller.main(arguments);
+            return;
         }
         Controller controller = new Controller(args[1]);
         Job[] jobs = controller.parseJobs(Reader.read(args[0]));
