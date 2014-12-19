@@ -154,9 +154,15 @@ public class Controller {
      * @param args Program arguments
      */
     public static void main(String args[]) {
-        if (args.length != 2) {
+        if (args.length != 2 || args.length != 1) {
             Terminal.printLine("Please provide a filename and queue type");
             System.exit(1);
+        }
+        if (args.length == 1) {
+            String[] arguments = new String[2];
+            arguments[0] = args[0];
+            arguments[1] = "waitingarea=fifo";
+            Controller.main(arguments);
         }
         Controller controller = new Controller(args[1]);
         Job[] jobs = controller.parseJobs(Reader.read(args[0]));

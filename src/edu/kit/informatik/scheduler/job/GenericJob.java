@@ -25,21 +25,24 @@ public class GenericJob {
 
 
     /**
-     * @inheritDoc
+     * Return the Job's complexity
+     * @return {@code this.complexity}
      */
     public int getComplexity() {
         return complexity;
     }
 
     /**
-     * @inheritDoc
+     * Gets the name of the Job
+     * @return {@code this.name}
      */
     public String getName() {
         return name;
     }
 
     /**
-     * @inheritDoc
+     * Gets the arrival time of the Job
+     * @return {@code this.arrivalTime}
      */
     public int getArrivalTime() {
         return arrivalTime;

@@ -11,7 +11,8 @@ import java.util.LinkedList;
  */
 public class Fifo extends LinkedList<Job> implements edu.kit.informatik.scheduler.queue.Queue {
     /**
-     * @inheritDoc
+     * Returns a String with all elements
+     * @return String with all elements
      */
     public String toString() {
         Job current;

@@ -1,10 +1,7 @@
 package edu.kit.informatik.scheduler;
 
 import edu.kit.informatik.Terminal;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.FileReader;
 import java.io.FileNotFoundException;
 import java.io.BufferedReader;

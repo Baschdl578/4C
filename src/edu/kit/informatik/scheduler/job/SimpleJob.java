@@ -28,14 +28,16 @@ public class SimpleJob extends GenericJob implements Job, Comparable<Job> {
     }
 
     /**
-     * @inheritDoc
+     * Returns the total runtime
+     * @return runtime
      */
     public int process() {
         return this.getComplexity();
     }
 
     /**
-     * @inheritDoc
+     * copies a job
+     * @return similar job
      */
     public SimpleJob copy() {
         return new SimpleJob(this.getComplexity(), this.getArrivalTime(), this.getName());

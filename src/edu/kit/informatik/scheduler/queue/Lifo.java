@@ -11,21 +11,25 @@ import java.util.*;
  */
 public class Lifo extends Stack<Job> implements edu.kit.informatik.scheduler.queue.Queue {
     /**
-     * @inheritDoc
+     * Adds a Job to the queue
+     * @param job Job to add
+     * @return true if success
      */
     public boolean add(Job job) {
         return push(job).equals(job);
     }
 
     /**
-     * @inheritDoc
+     * Removes and returns the next Job
+     * @return The next Job
      */
     public Job remove() {
         return pop();
     }
 
     /**
-     * @inheritDoc
+     * Returns a String with all elements
+     * @return String with all elements
      */
     public String toString() {
         Job current;

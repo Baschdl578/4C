@@ -2,7 +2,6 @@ package edu.kit.informatik.scheduler.queue;
 
 import edu.kit.informatik.scheduler.job.Job;
 
-import java.util.Comparator;
 import java.util.Iterator;
 import java.util.PriorityQueue;
 
@@ -14,7 +13,8 @@ import java.util.PriorityQueue;
 public class Sjf extends PriorityQueue<Job> implements edu.kit.informatik.scheduler.queue.Queue {
 
     /**
-     * @inheritDoc
+     * Returns a String with all elements
+     * @return String with all elements
      */
     public String toString() {
         Job current;
