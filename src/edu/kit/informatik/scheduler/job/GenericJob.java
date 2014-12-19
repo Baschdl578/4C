@@ -50,7 +50,8 @@ public class GenericJob {
 
 
     /**
-     * @inheritDoc
+     * Sets the complexity
+     * @param complexity new complexity
      */
     public void setComplexity(int complexity) {
         this.complexity = complexity;

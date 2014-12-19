@@ -154,7 +154,7 @@ public class Controller {
      * @param args Program arguments
      */
     public static void main(String args[]) {
-        if (args.length != 2 || args.length != 1) {
+        if (args.length != 2 && args.length != 1) {
             Terminal.printLine("Please provide a filename and queue type");
             System.exit(1);
         }
